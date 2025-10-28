@@ -11,7 +11,7 @@ spec:
     path: manifests  # Carpeta en el repo con los YAML de Kubernetes
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: prueba-envoy
   syncPolicy:
     automated:
       prune: false

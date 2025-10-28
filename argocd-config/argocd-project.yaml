@@ -1,5 +1,5 @@
 apiVersion: argoproj.io/v1alpha1
-kind: project
+kind: AppProject
 metadata:
   name: goty-project
   namespace: argocd
@@ -8,7 +8,7 @@ spec:
   sourceRepos:
   - '*'  # Permite cualquier repo, ajusta a tu repo específico
   destinations:
-  - namespace: default
+  - namespace: prueba-envoy
     server: https://kubernetes.default.svc
   clusterResourceWhitelist:
   - group: ''

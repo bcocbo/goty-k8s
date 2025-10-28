@@ -31,5 +31,12 @@ spec:
       volumes:
       - name: input-volume
         persistentVolumeClaim:
-          claimName: input-pvc  # Referencia al PVC
-           
+          claimName: input-pvc  # Referencia al PVC  
+      initContainers:
+      - name: init-mocks
+        image: bitnami/git
+        command: ['sh', '-c', 'git clone https://github.com/lectrapb/kubernates-challenge-goty.git /tmp/repo && cp /tmp/repo/shared/server-mock/mocks.config.js /input/ && cp -r /tmp/repo/shared/server-mock/mocks /input/']
+        volumeMounts:
+        - mountPath: /input
+          name: input-volume  
+      

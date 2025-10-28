@@ -13,6 +13,8 @@ spec:
       labels:
         app: goty-front
     spec:
+      nodeSelector:
+        karpenter.sh/nodepool: spot
       containers:
       - name: goty-front
         image: gporras/goty-front:latest
@@ -21,17 +23,4 @@ spec:
         env:
         - name: URL
           value: http://backend-bff:5000
-    pod:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: karpenter.sh/nodepool
-                  operator: In
-                  values:
-                    - spot
-      tolerations:
-        - key: spot
-          operator: Exists
-          effect: NoSchedule  
+    

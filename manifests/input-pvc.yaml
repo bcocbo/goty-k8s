@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 1Gi  # Ajusta según el tamaño de tus mocks (ej. 1Gi para empezar)
-  storageClassName: gp3  # O gp2 si usas el default de EKS; verifica con `kubectl get sc`
+  storageClassName: gp2  # O gp2 si usas el default de EKS; verifica con `kubectl get sc`

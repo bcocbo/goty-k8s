@@ -13,6 +13,8 @@ spec:
       labels:
         app: backend-bff
     spec:
+      nodeSelector:
+        karpenter.sh/nodepool: spot
       containers:
       - name: backend-bff
         image: gporras/goty-bsf:latest
@@ -23,17 +25,4 @@ spec:
           value: prod
         - name: GAMES_HOST
           value: http://mocksserver:3100
-    pod:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: karpenter.sh/nodepool
-                  operator: In
-                  values:
-                    - spot
-      tolerations:
-        - key: spot
-          operator: Exists
-          effect: NoSchedule        
+    

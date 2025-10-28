@@ -30,3 +30,17 @@ spec:
       - name: input-volume
         persistentVolumeClaim:
           claimName: input-pvc  # Referencia al PVC
+    pod:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: karpenter.sh/nodepool
+                  operator: In
+                  values:
+                    - spot
+      tolerations:
+        - key: spot
+          operator: Exists
+          effect: NoSchedule        

@@ -8,7 +8,7 @@ spec:
   sourceRepos:
   - '*'  # Permite cualquier repo, ajusta a tu repo específico
   destinations:
-  - namespace: prueba-envoy
+  - namespace: default
     server: https://kubernetes.default.svc
   clusterResourceWhitelist:
   - group: ''

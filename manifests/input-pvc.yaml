@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: input-pvc
+  namespace: prueba-envoy
+spec:
+  accessModes:
+    - ReadWriteOnce  # Para un solo pod; usa ReadWriteMany con EFS si necesitas multi-pod
+  resources:
+    requests:
+      storage: 1Gi  # Ajusta según el tamaño de tus mocks (ej. 1Gi para empezar)
+  storageClassName: gp3  # O gp2 si usas el default de EKS; verifica con `kubectl get sc`

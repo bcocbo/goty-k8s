@@ -23,16 +23,10 @@ spec:
         - name: MOCKS_PATH
           value: /input
         volumeMounts:
-        - mountPath: /input/mocks
-          name: mocks-volume
-        - mountPath: /input/mocks.config.js
-          name: config-volume
-          subPath: mocks.config.js
+        - mountPath: /input  # Monta el PVC completo en /input (incluye mocks/ y mocks.config.js)
+          name: input-volume
         command: ["npm", "start"]
       volumes:
-      - name: mocks-volume
-        configMap:
-          name: mocks-dir
-      - name: config-volume
-        configMap:
-          name: mocks-config
+      - name: input-volume
+        persistentVolumeClaim:
+          claimName: input-pvc  # Referencia al PVC

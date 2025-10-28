@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goty-front
+  namespace: prueba-envoy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: goty-front
+  template:
+    metadata:
+      labels:
+        app: goty-front
+    spec:
+      containers:
+      - name: goty-front
+        image: gporras/goty-front:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: URL
+          value: http://backend-bff:5000

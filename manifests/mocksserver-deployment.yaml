@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mocksserver
+  namespace: prueba-envoy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mocksserver
+  template:
+    metadata:
+      labels:
+        app: mocksserver
+    spec:
+      containers:
+      - name: mocksserver
+        image: mocksserver/main
+        ports:
+        - containerPort: 3100
+        - containerPort: 3110
+        env:
+        - name: MOCKS_PATH
+          value: /input
+        volumeMounts:
+        - mountPath: /input/mocks
+          name: mocks-volume
+        - mountPath: /input/mocks.config.js
+          name: config-volume
+          subPath: mocks.config.js
+        command: ["npm", "start"]
+      volumes:
+      - name: mocks-volume
+        configMap:
+          name: mocks-dir
+      - name: config-volume
+        configMap:
+          name: mocks-config

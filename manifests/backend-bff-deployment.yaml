@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-bff
+  namespace: prueba-envoy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-bff
+  template:
+    metadata:
+      labels:
+        app: backend-bff
+    spec:
+      containers:
+      - name: backend-bff
+        image: gporras/goty-bsf:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: prod
+        - name: GAMES_HOST
+          value: http://mocksserver:3100

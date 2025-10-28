@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: goty-app
+  namespace: argocd
+spec:
+  project: goty-project
+  source:
+    repoURL: https://github.com/bcocbo/goty-k8s.git  # Cambia a tu repo Git
+    targetRevision: main  # O HEAD/branch
+    path: manifests  # Carpeta en el repo con los YAML de Kubernetes
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

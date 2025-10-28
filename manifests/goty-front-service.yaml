@@ -4,7 +4,7 @@ metadata:
   name: goty-front
   namespace: prueba-envoy
 spec:
-  type: LoadBalancer  # Expone externamente en AWS con ELB
+  type: ClusterIP  # Expone externamente en AWS con ELB
   selector:
     app: goty-front
   ports:
